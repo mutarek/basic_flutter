@@ -15,6 +15,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void dispose() {
+    emailcon.dispose();
+    passcon.dispose();
+    super.dispose();
+  }
+
+  var emailcon = TextEditingController();
+  var passcon = TextEditingController();
+  String? emailerror;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
@@ -28,7 +39,9 @@ class _HomePageState extends State<HomePage> {
                 Image.asset('assets/images/loginv.png'),
                 TextField(
                   textInputAction: TextInputAction.next,
+                  controller: emailcon,
                   decoration: InputDecoration(
+                      errorText: emailerror,
                       labelText: 'Email Address',
                       enabledBorder: OutlineInputBorder(
                         borderSide:
@@ -46,6 +59,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 TextField(
                   textInputAction: TextInputAction.done,
+                  controller: passcon,
                   decoration: InputDecoration(
                       labelText: 'Password',
                       enabledBorder: OutlineInputBorder(
@@ -67,7 +81,11 @@ class _HomePageState extends State<HomePage> {
                   child: Container(
                     width: double.infinity,
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          if (emailcon.value.text.isEmpty) {
+                            emailerror = "Provide A Email";
+                          } else {}
+                        },
                         child: Padding(
                           padding: EdgeInsets.all(10),
                           child: Text(
@@ -82,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                   child: Container(
                     child: Row(
                       children: [
-                        Expanded(
+                        const Expanded(
                           flex: 1,
                           child: Align(
                             alignment: Alignment.bottomLeft,
