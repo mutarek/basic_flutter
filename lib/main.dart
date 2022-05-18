@@ -1,3 +1,4 @@
+import 'package:basic_flutter/HomePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -117,7 +118,12 @@ class _HomePageState extends State<HomePage> {
                           child: Align(
                             alignment: Alignment.bottomRight,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (builder) => MainPage()));
+                              },
                               child: Text('Create Account'),
                             ),
                           ),
